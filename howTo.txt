@@ -1,0 +1,66 @@
+
+création BDD :
+DONE table users : id - login - mot de passe
+DONE table words : id - mot proposé dans le jeu
+
+Création des pages :
+- index.php
+DONE inclusion game
+    Contiendra l'ensemble du jeu et les liens vers les autres ressources
+    si aucune session propose connexion ou inscription
+        -> si connexion -> connect.php
+        -> si inscription -> signIn.php
+
+    si session
+        -> affiche le formulaire du jeu
+            - Si word est défini
+                - des étoiles à la place des lettres du mot à trouver
+                - un formulaire pour saisir une lettre -> + submit
+                - un champ des lettres déjà saisies
+                - nombre de tentatives -> stocké en session
+              Sinon
+                - proposer de lancer une partie  -> defineWord
+
+- connect.php
+inclusion dbb
+    Contiendra un formulaire : login et mot de passe + submit
+    appel à la base de données
+    vérification du mot de passe : password_verify
+    si erreur -> message
+    sinon
+    création de la session
+    redirection vers index
+
+- signIn.php
+inclusion bdd
+    Contiendra le formulaire : login, mot de passe [login unique] + submit
+    appel à la base de données
+    si login déjà utilisé -> message
+    sinon enregistrement en base ->  Hash du mot de passe -> password_hash(, PASSWORD_ARGON2ID);
+    Pas de vérification -> création de la session
+    redirection vers index
+
+- disconnect.php
+inclusion dbb
+    formulaire : juste bouton déco
+    suppression de la session
+    redirection vers la page index
+
+- functionBDD.php
+    contient toutes les fonctions liées à la BDD
+    Connexion
+    lecture users et words
+    écriture users
+
+- functionGame.php
+DONE inclusion dbb
+    contient toutes les fonctions propres au jeu
+    defineWord -> connexion dbb et renvoie aléaroirement un mot à trouver -> enregistrement en session word
+    checkLetter
+        -> si une lettre est postée vérification si elle se trouve dans le wordToFind
+            -> si oui -> on change l'étoile par la lettre
+                -> si le mot est trouvé -> message victoire et proposition nouvelle partie
+            -> si non -> tentative -1
+                -> si tentative = 0 -> message défaite et proposition nouvelle partie
+        -> si lettre déjà proposée : tentative - 1, message etourderie
+
