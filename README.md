@@ -1,12 +1,11 @@
 # penduObj
 
-script for the DB
 -- phpMyAdmin SQL Dump
 -- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 18 juin 2021 à 13:54
+-- Généré le :  ven. 18 juin 2021 à 13:56
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.19
 
@@ -24,6 +23,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `hanged`
 --
+CREATE DATABASE IF NOT EXISTS `hanged` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `hanged`;
 
 -- --------------------------------------------------------
 
@@ -475,3 +476,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
