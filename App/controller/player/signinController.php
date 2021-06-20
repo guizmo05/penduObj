@@ -30,9 +30,14 @@ if (isset($_POST['user']))
 {
     // Vérification de l'inexistance du user et ajout
     try {
+        // $_POST['pwd'] pourrait ne pas exister et provoquer une erreur
         $_SESSION['user'] = serialize(signinPlayer($_POST['user'], $_POST['pwd']));
         header ('Location: /');
     } catch (PDOException|Exception $e) {
+        // un status HTTP 4XX devrait être retourné également.
+        // Comment dissocier une erreur liée à un pb technique, d'une mauvaise saisie ?
+        // Comment prévenir l'utilisateur que son mot de passe est trop court, ou trop simple ?
+        // Comment prévenir l'utilisateur que l'identifiant choisi est déjà utilisé ?
         echo 'Création Impossible';
     }
 }

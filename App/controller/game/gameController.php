@@ -8,6 +8,8 @@ use App\Domain\Game\Game;
 use App\Domain\Game\LetterProposal;
 use App\Domain\Game\WordProposal;
 
+// tous les fichiers du répertoire controller devraient contenir une classe.
+
 /* Init a new game, if $_SESSION['word'] is not set */
 if (!isset( $_SESSION['game'])) {
     $game = initGame();
@@ -22,10 +24,12 @@ if (isset($_POST['word'])) {
 }
 
 function initGame() {
-    $game = new Game();
-    return $game;
+    return new Game;
 }
 
+// en utilisant une classe, l'usage du design pattern dependency injection est tout indiqué ici pour obtenir letterProposal
+// et wordProposal (les noms devraient commencer par une majuscule),
+// avec en passant plutôt l'usage d'un argument à la méthode checkProposal plutôt qu'au constructeur.
 function letterProposition(string $letter) : letterProposal {
     return new letterProposal($letter);
 }

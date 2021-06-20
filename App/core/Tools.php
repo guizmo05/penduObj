@@ -7,6 +7,8 @@ namespace App\core;
 use Exception;
 use PDO;
 
+// Cette classe est un fourre-tout. elle gère l'affichage, le routing, des helpers, et la connection à la BDD
+// c'est trop. SOLID -> S Single Responsibility / Concern Separation.
 class Tools
 {
     static function displayTemplates(string $template): string
@@ -23,6 +25,7 @@ class Tools
     static function getControllerByPath(string $path): string
     {
         foreach (ROUTES as $route) {
+            // la condition `$path ?? '/'` n'est jamais vraie, ?? vérifie si c'est null or l'argument de la méthode n'est pas nullable.
             if ($route['path'] === ($path ?? '/')) {
                 return $route['controller'];
             }
@@ -43,6 +46,7 @@ class Tools
     static function getLink($path): string
     {
         foreach (ROUTES as $route) {
+            // ici c'est plutôt un name que tu souhaites comparer, plutôt que le path.
             if ($route['path'] === $path) {
                 return '<a href=\'' . $route['path'] . '\'>' . $route['label'] . '</a>';
             }
@@ -62,7 +66,8 @@ class Tools
     }
 
     static function getPDO() : PDO {
-        $pdo = new PDO('mysql:host=localhost;port=3306;dbname=hanged', 'root', '');
+        // je ne devrais pas avoir changer de code pour me connecter à ma base de données.
+        $pdo = new PDO('sqlite://db');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         return $pdo;

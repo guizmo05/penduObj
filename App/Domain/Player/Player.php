@@ -10,7 +10,8 @@ class Player
     private string $name;
     private string $pwd;
 
-    public function __construct (int $id, string $name, string $pwd) {
+    public function __construct (int $id, string $name, string $pwd)
+    {
         $this->id = $id;
         $this->name = $name;
         $this->pwd = $pwd;

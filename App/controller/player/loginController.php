@@ -19,7 +19,9 @@ function connectPlayer (string $user, string $pwd) : Player {
      throw new Exception('Erreur authentification');
     }
 
+    // tous les traitements liés à la base de données ou la session devraient être dans un repository
     $pdo = Tools::getPDO();
+    // que représente le champ user ? son username, son email, un numéro de téléphone, un identifiant ?
     $preparation = $pdo->prepare('select * from users where user=:user');
     $preparation->execute(['user' => $user, ]);
     $users = $preparation->fetchAll(PDO::FETCH_ASSOC);
@@ -48,6 +50,4 @@ function connectForm(): string {
     return ob_get_clean();
 }
 
-echo connectForm()
-
-?>
+echo connectForm();
