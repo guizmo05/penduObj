@@ -1,3 +1,5 @@
+On évite de mettre du SQL dans un Readme ^^
+
 # penduObj
 
 -- phpMyAdmin SQL Dump

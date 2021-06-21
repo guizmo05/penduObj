@@ -33,6 +33,7 @@ class Game
         return $this->word;
     }
 
+    // cette méthode n'est jamais appelée.
     public function setWord(Word $word): void
     {
         $this->word = $word;
@@ -43,6 +44,7 @@ class Game
         return $this->letters;
     }
 
+    // addLetters serait plus approprié. setLetters sous-entends qu'on écrase la valeur, or ici on concatène;
     public function setLetters(string $letters): void
     {
         $this->letters .= $letters;

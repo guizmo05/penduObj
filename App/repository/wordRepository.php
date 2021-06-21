@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 namespace App\repository;
+
 use App\core\Tools;
 use PDO;
 
+// Ce fichier devrait contenir une classe
 
 function getNewWord(): string {
     $pdo = Tools::getPDO();

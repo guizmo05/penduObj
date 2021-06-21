@@ -13,8 +13,8 @@ class Word
     private string $maskedWord;
 
     function __construct() {
-        self::getRandomWord();
-        self::setMaskedWord();
+        $this->getRandomWord();
+        $this->setMaskedWord();
     }
 
     public function getWord(): string
@@ -26,7 +26,7 @@ class Word
         return $this->maskedWord;
     }
 
-    function getRandomWord() : void {
+    private function getRandomWord() : void {
         $pdo = Tools::getPDO();
 
         $words = $pdo->query('SELECT * FROM words order by rand() LIMIT 1');
@@ -37,7 +37,7 @@ class Word
         }
     }
 
-    function setMaskedWord(string $maskedWord = '') : void {
+    public function setMaskedWord(string $maskedWord = '') : void {
         $this->maskedWord = $maskedWord;
 
         if ($this->maskedWord === '') {
@@ -47,7 +47,8 @@ class Word
         }
     }
 
-    function updateMaskedWord(string $letter) : void {
+    public function updateMaskedWord(string $letter) : void {
+        // on évite l'usage de fonction dans le second argument d'un for car elle est appelée à chaque tour
         for($i=0;$i<strlen($this->word);$i++ ) {
             if ($this->word[$i] === $letter) {
                 $this->maskedWord[$i] = $letter;
